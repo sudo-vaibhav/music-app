@@ -10,7 +10,7 @@ function App() {
     <Router>
       <HOC>
         <Switch>
-          <Route path="/play" exact>
+          <Route path="/play/:songId">
             <MusicPlayer />
           </Route>
           <Route path="/" exact>
