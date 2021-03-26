@@ -1,0 +1,24 @@
+.music-player {
+  text-align: center;
+
+  .music-player__album-art {
+    width: 100%;
+  }
+
+  .music-player__player-area {
+    background-color: #6b1022;
+    color: white;
+    height: calc(100vh - 100vw);
+    margin-top: -5px;
+
+    > * {
+      padding: 1rem 0;
+    }
+
+    .music-player__player-area__play-button {
+      $button-dimension: 30px;
+      width: $button-dimension;
+      height: $button-dimension;
+    }
+  }
+}
