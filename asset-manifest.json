@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "/music-app/static/css/main.2580d4c2.chunk.css",
+    "main.js": "/music-app/static/js/main.de2ae6ab.chunk.js",
+    "main.js.map": "/music-app/static/js/main.de2ae6ab.chunk.js.map",
+    "runtime-main.js": "/music-app/static/js/runtime-main.bb7f9c27.js",
+    "runtime-main.js.map": "/music-app/static/js/runtime-main.bb7f9c27.js.map",
+    "static/js/2.6742d354.chunk.js": "/music-app/static/js/2.6742d354.chunk.js",
+    "static/js/2.6742d354.chunk.js.map": "/music-app/static/js/2.6742d354.chunk.js.map",
+    "static/js/3.20411a55.chunk.js": "/music-app/static/js/3.20411a55.chunk.js",
+    "static/js/3.20411a55.chunk.js.map": "/music-app/static/js/3.20411a55.chunk.js.map",
+    "index.html": "/music-app/index.html",
+    "static/css/main.2580d4c2.chunk.css.map": "/music-app/static/css/main.2580d4c2.chunk.css.map",
+    "static/js/2.6742d354.chunk.js.LICENSE.txt": "/music-app/static/js/2.6742d354.chunk.js.LICENSE.txt",
+    "static/media/albumArt.ec084636.png": "/music-app/static/media/albumArt.ec084636.png",
+    "static/media/play-button.68184ad5.svg": "/music-app/static/media/play-button.68184ad5.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.bb7f9c27.js",
+    "static/js/2.6742d354.chunk.js",
+    "static/css/main.2580d4c2.chunk.css",
+    "static/js/main.de2ae6ab.chunk.js"
+  ]
+}
