@@ -11,7 +11,7 @@ const MusicPlayer = () => {
   const waveformRef = useRef(null)
   const wavesurfer = useRef(null)
 
-  const [{ playing, song, color }, setData] = useState({
+  const [{ playing, song, color, loading }, setData] = useState({
     song: {
       _id: '',
       name: '',
@@ -21,6 +21,7 @@ const MusicPlayer = () => {
     },
     color: 'black',
     playing: false,
+    loading: true,
   })
 
   const handlePlayPause = () => {
@@ -32,6 +33,7 @@ const MusicPlayer = () => {
   }
   useEffect(() => {
     ;(async () => {
+      console.log('asdfas')
       const song = await axios
         .get(`https://iste-musicapp.azurewebsites.net/api/songs/${songId}`)
         .then((resp) => resp.data)
@@ -39,7 +41,7 @@ const MusicPlayer = () => {
       let vibrantColor
       Vibrant.from(song.img_url).getPalette((err, palette) => {
         vibrantColor = palette.Vibrant.hex
-
+        console.log('got vibrant color')
         if (waveformRef.current) {
           wavesurfer.current = WaveSurfer.create({
             container: waveformRef.current,
@@ -54,32 +56,62 @@ const MusicPlayer = () => {
             // If true, normalize by the maximum peak instead of 1.0.
             normalize: true,
             // Use the PeakCache to improve rendering speed of large waveforms.
-            partialRender: true,
+            // partialRender: true,
           })
-          console.log(song.song_url)
+          console.log('here')
           wavesurfer.current.load(song.song_url)
           wavesurfer.current.on('ready', function () {
-            // https://wavesurfer-js.org/docs/methods.html
             wavesurfer.current.play()
-
             setData({
               song,
               color: vibrantColor,
               playing: true,
+              loading: false,
+            })
+          })
+
+          wavesurfer.current.on('finish', () => {
+            setData({
+              playing: false,
+              song,
+              color,
+              loading,
             })
           })
         }
       })
     })()
+
+    return () => {
+      console.log('destroying wavesurfer instance')
+      if (wavesurfer.current) wavesurfer.current.destroy()
+    }
   }, [songId])
 
   return (
+    // !loading ?
     <div className="music-player">
       <img src={song.img_url} alt="" className="music-player__album-art" />
       <div style={{ background: color }} className="music-player__player-area">
         <h1>{song.name}</h1>
-        <h4>{song.artist}</h4>
-        <div className="container w-75" ref={waveformRef}></div>
+        <small>{song.artist}</small>
+        <div
+          className="container w-75"
+          style={{
+            position: 'relative',
+          }}
+        >
+          <div ref={waveformRef}></div>
+          <div
+            style={{
+              height: '2px',
+              width: '100%',
+              background: 'rgba(255,255,255,0.5)',
+              position: 'absolute',
+              top: '50%',
+            }}
+          ></div>
+        </div>
         <div onClick={handlePlayPause}>
           {playing ? (
             <FeatherIcon icon="pause" size={36} />
@@ -89,7 +121,22 @@ const MusicPlayer = () => {
         </div>
       </div>
     </div>
-  )
+    // : (
+    //   <div
+    //     style={{
+    //       position: 'fixed',
+    //       height: '100vh',
+    //       width: '100vw',
+    //       display: 'grid',
+    //       placeItems: 'center',
+    //       pointerEvents: 'none',
+    //     }}
+    //   >
+    //     <div className="spinner-border text-light" role="status"></div>
+    //     <div ref={waveformRef}></div>
+    //   </div>
+    //     )
+   /*: (*/)
 }
 
 export default MusicPlayer

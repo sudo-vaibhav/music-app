@@ -4,7 +4,9 @@
 
   .music-player__album-art {
     width: 100vw;
-    max-width: 400px;
+    height: 100vw;
+    max-width: 450px;
+    max-height: 450px;
     background-color: $black;
   }
 
@@ -13,6 +15,7 @@
     color: white;
     min-height: calc(100vh - 100vw);
     margin-top: -5px;
+    padding-top: 2rem;
 
     h1,
     h4 {

@@ -17,6 +17,7 @@ const Home = () => {
         <FeatherIcon icon="search" />
       </Link>
       <div className="container mt-5 mx-0 row justify-content-between">
+        <h1>Latest Songs</h1>
         {songs.map((song) => {
           return (
             <Link
