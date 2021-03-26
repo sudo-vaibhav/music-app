@@ -4,32 +4,21 @@
 
   .music-player__album-art {
     width: 100vw;
-    height: 100vw;
+    height: 56vh;
     max-width: 450px;
     max-height: 450px;
-    background-color: $black;
   }
 
   .music-player__player-area {
     // background-color: #6b1022;
     color: white;
-    min-height: calc(100vh - 100vw);
+    min-height: 45vh;
     margin-top: -5px;
-    padding-top: 2rem;
+    padding-top: 1rem;
 
     h1,
     h4 {
       padding-bottom: 0;
-    }
-
-    > * {
-      padding: 1rem 0;
-    }
-
-    .music-player__player-area__play-button {
-      $button-dimension: 30px;
-      width: $button-dimension;
-      height: $button-dimension;
     }
   }
 }

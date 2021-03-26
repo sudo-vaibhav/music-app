@@ -87,16 +87,30 @@ const MusicPlayer = () => {
       if (wavesurfer.current) wavesurfer.current.destroy()
     }
   }, [songId])
-
+  console.log(song.img_url)
   return (
     // !loading ?
     <div className="music-player">
-      <img src={song.img_url} alt="" className="music-player__album-art" />
-      <div style={{ background: color }} className="music-player__player-area">
+      <div
+        style={{
+          backgroundSize: 'cover',
+          backgroundRepeat: 'no-repeat',
+          backgroundPosition: 'center',
+          backgroundImage: `url(${song.img_url})`,
+        }}
+        className="music-player__album-art"
+      ></div>
+      {/* <img src={song.img_url} alt=""  /> */}
+      <div
+        style={{
+          backgroundColor: color,
+        }}
+        className="music-player__player-area"
+      >
         <h1>{song.name}</h1>
         <small>{song.artist}</small>
         <div
-          className="container w-75"
+          className="container w-75 my-4"
           style={{
             position: 'relative',
           }}
@@ -136,6 +150,18 @@ const MusicPlayer = () => {
     //     <div ref={waveformRef}></div>
     //   </div>
     //     )
+    /*: (*/
+    /*: (*/
+    /*: (*/
+    /*: (*/
+    /*: (*/
+    /*: (*/
+    /*: (*/
+    /*: (*/
+    /*: (*/
+    /*: (*/
+    /*: (*/
+    /*: (*/
    /*: (*/)
 }
 
