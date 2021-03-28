@@ -93,6 +93,7 @@ const MusicPlayer = () => {
           style={{
             fontWeight: 'bold',
           }}
+          className="pt-2"
         >
           {song.name}
         </h1>

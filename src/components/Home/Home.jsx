@@ -28,7 +28,6 @@ const Home = () => {
               key={song._id}
             >
               <SmoothImage src={song.img_url} />
-              {/* <img src={song.img_url} className="w-100" alt={song.name} /> */}
               <h6 className="mt-2 mb-0">{song.name}</h6>
               <small className="text-muted">{song.artist}</small>
             </Link>

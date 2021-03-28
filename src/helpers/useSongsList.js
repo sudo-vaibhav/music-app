@@ -6,8 +6,6 @@ const useSongsList = (query = '') => {
   useEffect(() => {
     const fetchSongs = async () => {
       const data = await axios.get(`/search?q=${query}`)
-      // .then((resp) => resp.data)
-
       setSongs(data)
     }
 
