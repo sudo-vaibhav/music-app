@@ -2,26 +2,27 @@ import './MusicPlayer.scss'
 import { useParams } from 'react-router'
 import FeatherIcon from 'feather-icons-react'
 import { useEffect, useState, useRef } from 'react'
-import axios from 'axios'
+import axios from '../../helpers/axiosForMusic'
+
 import * as Vibrant from 'node-vibrant'
 import WaveSurfer from 'wavesurfer.js'
+import SmoothImage from 'react-smooth-image'
 
 const MusicPlayer = () => {
   const { songId } = useParams()
   const waveformRef = useRef(null)
   const wavesurfer = useRef(null)
 
-  const [{ playing, song, color, loading }, setData] = useState({
+  const [{ playing, song, color }, setData] = useState({
     song: {
       _id: '',
-      name: '',
-      artist: '',
+      name: 'Loading',
+      artist: 'Loading',
       img_url: '',
       song_url: '',
     },
     color: 'black',
     playing: false,
-    loading: true,
   })
 
   const handlePlayPause = () => {
@@ -31,34 +32,26 @@ const MusicPlayer = () => {
     })
     wavesurfer.current.playPause()
   }
+
   useEffect(() => {
     ;(async () => {
-      console.log('asdfas')
-      const song = await axios
-        .get(`https://iste-musicapp.azurewebsites.net/api/songs/${songId}`)
-        .then((resp) => resp.data)
+      const song = await axios.get(`/songs/${songId}`)
 
       let vibrantColor
       Vibrant.from(song.img_url).getPalette((err, palette) => {
         vibrantColor = palette.Vibrant.hex
-        console.log('got vibrant color')
         if (waveformRef.current) {
           wavesurfer.current = WaveSurfer.create({
             container: waveformRef.current,
-            // waveColor: colors.primary,
             waveColor: 'transparent',
             progressColor: 'white',
             cursorColor: 'white',
-            barWidth: 4,
+            barWidth: 6,
             barRadius: 10,
             responsive: true,
             height: 75,
-            // If true, normalize by the maximum peak instead of 1.0.
             normalize: true,
-            // Use the PeakCache to improve rendering speed of large waveforms.
-            // partialRender: true,
           })
-          console.log('here')
           wavesurfer.current.load(song.song_url)
           wavesurfer.current.on('ready', function () {
             wavesurfer.current.play()
@@ -66,7 +59,6 @@ const MusicPlayer = () => {
               song,
               color: vibrantColor,
               playing: true,
-              loading: false,
             })
           })
 
@@ -75,7 +67,6 @@ const MusicPlayer = () => {
               playing: false,
               song,
               color,
-              loading,
             })
           })
         }
@@ -88,17 +79,10 @@ const MusicPlayer = () => {
     }
   }, [songId])
   return (
-    // !loading ?
     <div className="music-player">
-      <div
-        style={{
-          backgroundSize: 'cover',
-          backgroundRepeat: 'no-repeat',
-          backgroundPosition: 'center',
-          backgroundImage: `url(${song.img_url})`,
-        }}
-        className="music-player__album-art"
-      ></div>
+      <div className="music-player__album-art">
+        <SmoothImage src={song.img_url} />
+      </div>
       <div
         style={{
           backgroundColor: color,
@@ -114,9 +98,10 @@ const MusicPlayer = () => {
         </h1>
         <small>{song.artist}</small>
         <div
-          className="container w-75 my-4"
+          className="container-fluid px-0 w-75 my-4"
           style={{
             position: 'relative',
+            height: 75,
           }}
         >
           <div ref={waveformRef}></div>
@@ -132,43 +117,13 @@ const MusicPlayer = () => {
         </div>
         <div onClick={handlePlayPause}>
           {playing ? (
-            <FeatherIcon icon="pause" size={36} />
+            <FeatherIcon fill="white" icon="pause" size={36} />
           ) : (
-            <FeatherIcon icon="play" size={36} />
+            <FeatherIcon fill="white" icon="play" size={36} />
           )}
         </div>
       </div>
     </div>
-    // : (
-    //   <div
-    //     style={{
-    //       position: 'fixed',
-    //       height: '100vh',
-    //       width: '100vw',
-    //       display: 'grid',
-    //       placeItems: 'center',
-    //       pointerEvents: 'none',
-    //     }}
-    //   >
-    //     <div className="spinner-border text-light" role="status"></div>
-    //     <div ref={waveformRef}></div>
-    //   </div>
-    //     )
-    /*: (*/
-    /*: (*/
-    /*: (*/
-    /*: (*/
-    /*: (*/
-    /*: (*/
-    /*: (*/
-    /*: (*/
-    /*: (*/
-    /*: (*/
-    /*: (*/
-    /*: (*/
-    /*: (*/
-    /*: (*/
-   /*: (*/)
+  )
 }
-
 export default MusicPlayer

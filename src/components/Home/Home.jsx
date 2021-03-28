@@ -1,6 +1,8 @@
 import FeatherIcon from 'feather-icons-react'
 import { Link } from 'react-router-dom'
 import useSongsList from '../../helpers/useSongsList'
+import SmoothImage from 'react-smooth-image'
+
 const Home = () => {
   const songs = useSongsList()
 
@@ -25,7 +27,8 @@ const Home = () => {
               className="col-5 my-4"
               key={song._id}
             >
-              <img src={song.img_url} className="w-100" alt={song.name} />
+              <SmoothImage src={song.img_url} />
+              {/* <img src={song.img_url} className="w-100" alt={song.name} /> */}
               <h6 className="mt-2 mb-0">{song.name}</h6>
               <small className="text-muted">{song.artist}</small>
             </Link>

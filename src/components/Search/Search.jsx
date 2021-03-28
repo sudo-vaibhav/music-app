@@ -2,6 +2,7 @@ import FeatherIcon from 'feather-icons-react'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import useSongsList from '../../helpers/useSongsList'
+import SmoothImage from 'react-smooth-image'
 
 const Search = () => {
   const [query, setQuery] = useState('')
@@ -29,7 +30,7 @@ const Search = () => {
             borderRadius: '25px',
             background: '#444',
             border: 'none',
-            paddingLeft: '1rem',
+            padding: '0.5rem 1rem',
             color: 'white',
             flex: 1,
           }}
@@ -38,7 +39,7 @@ const Search = () => {
         />
         <FeatherIcon icon="search" style={{ marginLeft: '1rem' }} />
       </div>
-      <div className="container" style={{ paddingTop: '4rem' }}>
+      <div className="container" style={{ paddingTop: '5rem' }}>
         {songs.length !== 0 ? (
           <>
             <h6 className="text-muted mb-4">Most Relevant Results</h6>
@@ -53,11 +54,9 @@ const Search = () => {
                 return (
                   <div key={song._id}>
                     <Link to={`/play/${song._id}`}>
-                      <img
-                        src={song.img_url}
-                        style={{ width: '20vw', margin: '0 1.25vw' }}
-                        alt={song.name}
-                      />
+                      <div style={{ width: '20vw', margin: '0 1.25vw' }}>
+                        <SmoothImage src={song.img_url} />
+                      </div>
                     </Link>
                   </div>
                 )

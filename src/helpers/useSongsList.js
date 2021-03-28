@@ -1,13 +1,12 @@
 import { useEffect, useState } from 'react'
-import axios from 'axios'
+import axios from './axiosForMusic'
 
 const useSongsList = (query = '') => {
   const [songs, setSongs] = useState([])
   useEffect(() => {
     const fetchSongs = async () => {
-      const data = await axios
-        .get(`https://iste-musicapp.azurewebsites.net/api/search?q=${query}`)
-        .then((resp) => resp.data)
+      const data = await axios.get(`/search?q=${query}`)
+      // .then((resp) => resp.data)
 
       setSongs(data)
     }

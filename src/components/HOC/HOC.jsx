@@ -14,6 +14,7 @@ const HOC = ({ children }) => {
         style={{
           position: 'fixed',
           padding: '1rem',
+          zIndex: '100',
         }}
       >
         <FeatherIcon
