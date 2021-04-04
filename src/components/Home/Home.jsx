@@ -18,21 +18,23 @@ const Home = () => {
       >
         <FeatherIcon icon="search" />
       </Link>
-      <div className="container mt-5 mx-0 row justify-content-between">
+      <div className="container mt-5 mx-auto ">
         <h1>Latest Songs</h1>
-        {songs.map((song) => {
-          return (
-            <Link
-              to={`/play/${song._id}`}
-              className="col-5 my-4"
-              key={song._id}
-            >
-              <SmoothImage src={song.img_url} />
-              <h6 className="mt-2 mb-0">{song.name}</h6>
-              <small className="text-muted">{song.artist}</small>
-            </Link>
-          )
-        })}
+        <div className="row justify-content-around">
+          {songs.map((song) => {
+            return (
+              <Link
+                to={`/play/${song._id}`}
+                className="col-5 col-md-4 col-lg-3 my-4"
+                key={song._id}
+              >
+                <SmoothImage src={song.img_url} />
+                <h6 className="mt-2 mb-0">{song.name}</h6>
+                <small className="text-muted">{song.artist}</small>
+              </Link>
+            )
+          })}
+        </div>
       </div>
     </div>
   )

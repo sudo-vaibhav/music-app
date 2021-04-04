@@ -89,14 +89,7 @@ const MusicPlayer = () => {
         }}
         className="music-player__player-area"
       >
-        <h1
-          style={{
-            fontWeight: 'bold',
-          }}
-          className="pt-2"
-        >
-          {song.name}
-        </h1>
+        <h1 className="pt-2 font-weight-bold">{song.name}</h1>
         <small>{song.artist}</small>
         <div
           className="container-fluid px-0 w-75 my-4"
